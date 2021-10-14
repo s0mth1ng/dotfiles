@@ -113,11 +113,12 @@ source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export PATH=$PATH:~/.local/bin
+export PYTHONPATH="${PYTHONPATH}:/home/maxim/code/latex/labs/scripts/"
 
 alias jnote='jupyter notebook'
 alias open='xdg-open'
 alias copy='xclip -se c'
 alias code='code-insiders'
-alias la='exa --icons -a'
-alias ll='exa --icons -lah'
-alias ls='exa --icons --color=auto'
+# alias la='exa --icons -a'
+# alias ll='exa --icons -lah'
+# alias ls='exa --icons --color=auto'
