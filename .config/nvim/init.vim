@@ -1,9 +1,11 @@
 call plug#begin()
 
+Plug 'romainl/flattened'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -13,11 +15,13 @@ Plug 'tomtom/tcomment_vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
+Plug 'lervag/vimtex'
 
 call plug#end()
 
 let mapleader = " "
 
+let g:airline_theme='solarized'
 let g:formatdef_my_custom_cs = '"clang-format --style=\"{BasedOnStyle: Chromium, IndentWidth: 2}\""'
 let g:formatdef_my_custom_py = '"autopep8 --in-place --aggressive"'
 let g:formatters_cpp = ['my_custom_cs']
@@ -79,8 +83,9 @@ set colorcolumn=120
 set completeopt=menuone,noselect
 
 " colors
-set termguicolors
-colorscheme gruvbox
+" set termguicolors
+set background=dark
+color gruvbox
 
 lua << EOF
 
@@ -186,7 +191,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "pyright", "clangd" }
+local servers = { "pyright", "clangd", "texlab" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
