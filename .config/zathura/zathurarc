@@ -1,8 +1,0 @@
-set synctex true
-set synctex-editor-command "svim -G +%{line} %{input}"
-set selection-clipboard clipboard
-
-set recolor   
-set recolor-lightcolor \#222222
-set recolor-keephue
-set default-bg \#222230

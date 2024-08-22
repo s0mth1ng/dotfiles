@@ -1,0 +1,42 @@
+[python]
+python_binary = 'python3'
+symbol = '󰌠 '
+# symbol = ''
+style = 'green bold'
+format = '[($symbol$virtualenv )]($style)'
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
+
+# [git_status]
+# format = '([$all_status$ahead_behind ]($style))'
+
+# [git_branch]
+# symbol = ""
+# format = '[$symbol$branch(:$remote_branch)]($style) '
+
+[docker_context]
+disabled = true
+
+[golang]
+symbol = " "
+
+[package]
+symbol = ''
+
+[status]
+style = 'fg:red'
+format = '[$int]($style) '
+map_symbol = true
+disabled = false
+
+# [git_metrics]
+# disabled = false
+
+[cmd_duration]
+min_time = 1000
+format = '[$duration]($style) '
+
+[line_break]
+disabled = true

@@ -1,70 +1,79 @@
 {
-    // editor
-    "window.menuBarVisibility": "toggle",
-    "cSpell.language": "en,ru",
-    "terminal.integrated.copyOnSelection": true,
-    "editor.cursorBlinking": "phase",
-    "editor.cursorSmoothCaretAnimation": true,
-    "editor.smoothScrolling": true,
-    "workbench.list.smoothScrolling": true,
-    "git.confirmSync": false,
-    // vim
-    "vim.leader": "<space>",
-    "vim.handleKeys": {
-        "<C-b>": false,
-        "<C-k>": false,
-    },
-    "vim.visualModeKeyBindings": [
-        {
-            "before": [
-                "<leader>",
-                "s"
-            ],
-            "commands": [
-                "git.stageSelectedRanges"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "u"
-            ],
-            "commands": [
-                "git.unstageSelectedRanges"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "r"
-            ],
-            "commands": [
-                "git.revertSelectedRanges"
-            ]
-        }
-    ],
-    // python
-    "python.formatting.provider": "black",
-    "python.linting.flake8Enabled": true,
-    "python.linting.mypyEnabled": true,
+    "workbench.settings.editor": "json",
+    // "editor.fontSize": 14,
+    "terminal.integrated.fontSize": 14,
     "editor.unicodeHighlight.ambiguousCharacters": false,
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": true
+    "editor.fontFamily": "JetBrainsMono Nerd Font",
+    // "editor.fontWeight": "100",
+    // "markdown.preview.fontSize": 12,
+    "editor.fontLigatures": true,
+    // "terminal.integrated.fontFamily": "MesloLGS Nerd Font",
+    "window.commandCenter": false,
+    "editor.minimap.autohide": true,
+    "workbench.layoutControl.enabled": false,
+    "editor.guides.indentation": false,
+    "explorer.compactFolders": false,
+    "editor.smoothScrolling": true,
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.cursorBlinking": "phase",
+    // misc
+    "extensions.ignoreRecommendations": true,
+    "terminal.integrated.copyOnSelection": true,
+    "redhat.telemetry.enabled": false,
+    // "nestor.autocompletionEnabled": false,
+    "window.confirmSaveUntitledWorkspace": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    // spelling
+    "cSpell.language": "en,ru",
+    "cSpell.allowCompoundWords": true,
+    // git
+    "gitlens.currentLine.enabled": false,
+    "gitlens.views.commitDetails.files.layout": "tree",
+    "git.confirmSync": false,
+    // sql
+    "[sql]": {
+        "editor.defaultFormatter": "bradymholt.pgformatter"
     },
+    "pgFormatter.functionCase": "capitalize",
+    "sqltools.csvExport.quoted_string": false,
+    // python
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "never",
+            "source.fixAll": "never"
+        },
+        "editor.formatOnSave": true
+    },
+    "python.analysis.autoImportCompletions": true,
     "python.testing.pytestEnabled": true,
-    "python.testing.pytestArgs": [
-        "-v",
-        "--cov-report",
-        "html",
-        "--cov-report",
-        "xml",
-        "--cov=."
+    "mypy-type-checker.path": [
+        ".venv/bin/mypy"
     ],
-    "python.analysis.completeFunctionParens": true,
-    "python.analysis.diagnosticMode": "workspace",
-    // errorlens
-    "errorLens.enabledDiagnosticLevels": [
-        "error",
-        "warning"
-    ],
+    "python.analysis.autoFormatStrings": true,
+    // whichkey
+    "whichkey.sortOrder": "alphabetically",
+    "whichkey.delay": 0,
+    // neovim
+    "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+    "vscode-neovim.neovimInitVimPaths.darwin": "~/.config/nvim-vscode/init.lua",
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "files.exclude": {
+        "**/.*_cache": true,
+        "**/__pycache__": true,
+        ".coverage": true,
+    },
+    // go
+    "go.lintTool": "golangci-lint",
+    "diffEditor.experimental.useTrueInlineView": true,
+    "diffEditor.renderSideBySide": false,
+    "sqltools.useNodeRuntime": true,
+    "files.trimTrailingWhitespace": true,
+    "gruvboxMaterial.darkPalette": "original",
+    "gruvboxMaterial.italicKeywords": true,
+    "gruvboxMaterial.lightPalette": "original",
+    "workbench.iconTheme": "vscode-great-icons"
 }
