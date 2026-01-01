@@ -1,9 +1,3 @@
-local whichkey = {
-  show = function()
-    vim.fn.VSCodeNotify("whichkey.show")
-  end
-}
-
 local comment = {
   selected = function()
     vim.fn.VSCodeNotifyRange("editor.action.commentLine", vim.fn.line("v"), vim.fn.line("."), 1)
@@ -14,6 +8,9 @@ local file = {
   new = function()
     vim.fn.VSCodeNotify("workbench.explorer.fileView.focus")
     vim.fn.VSCodeNotify("explorer.newFile")
+  end,
+  focus = function()
+    vim.fn.VSCodeNotify("workbench.explorer.fileView.focus")
   end,
 
   save = function()
@@ -35,6 +32,12 @@ local file = {
   rename = function()
     vim.fn.VSCodeNotify("workbench.files.action.showActiveFileInExplorer")
     vim.fn.VSCodeNotify("renameFile")
+  end
+}
+
+local lsp = {
+  references = function()
+    vim.fn.VSCodeNotify("editor.action.referenceSearch.trigger")
   end
 }
 
@@ -125,8 +128,14 @@ local search = {
     vim.fn.VSCodeNotify("workbench.action.findInFiles")
   end,
   text = function()
-    vim.fn.VSCodeNotify("workbench.action.findInFiles")
+    vim.fn.VSCodeNotify("find-it-faster.findWithinFiles")
   end,
+	file = function()
+    vim.fn.VSCodeNotify("find-it-faster.findFiles")
+	end,
+	symbol = function()
+    vim.fn.VSCodeNotify("workbench.action.showAllSymbols")
+	end
 }
 
 local project = {
@@ -261,7 +270,6 @@ nv_keymap('<leader>a', '%')
 nx_keymap('j', 'gj')
 nx_keymap('k', 'gk')
 
-vim.keymap.set({ 'n', 'v' }, "<leader>", whichkey.show)
 vim.keymap.set({ 'n', 'v' }, "<leader>/", comment.selected)
 
 vim.keymap.set({ 'n' }, "<leader>i", editor.organizeImport)
@@ -295,12 +303,15 @@ vim.keymap.set({ 'n' }, "<leader>pf", project.findFile)
 vim.keymap.set({ 'n' }, "<leader>pp", project.switch)
 vim.keymap.set({ 'n' }, "<leader>pt", project.tree)
 
+-- lsp
+vim.keymap.set({ 'n' }, "<leader>gr", lsp.references)
+
 -- file
 vim.keymap.set({ 'n', 'v' }, "<space>w", file.save)
 vim.keymap.set({ 'n', 'v' }, "<space>wa", file.saveAll)
 vim.keymap.set({ 'n', 'v' }, "<space>fs", file.save)
 vim.keymap.set({ 'n', 'v' }, "<space>fS", file.saveAll)
-vim.keymap.set({ 'n' }, "<space>ff", file.format)
+vim.keymap.set({ 'n' }, "<space>ff", file.focus)
 vim.keymap.set({ 'n' }, "<space>fn", file.new)
 vim.keymap.set({ 'n' }, "<space>ft", file.showInExplorer)
 vim.keymap.set({ 'n' }, "<space>fr", file.rename)
@@ -326,6 +337,8 @@ vim.keymap.set({ 'n' }, "<leader>sr", search.reference)
 vim.keymap.set({ 'n' }, "<leader>sR", search.referenceInSideBar)
 vim.keymap.set({ 'n' }, "<leader>sp", search.project)
 vim.keymap.set({ 'n' }, "<leader>st", search.text)
+vim.keymap.set({ 'n' }, "<leader>sf", search.file)
+vim.keymap.set({ 'n' }, "<leader>ss", search.symbol)
 
 -- vscode
 vim.keymap.set({ 'n' }, "<leader>ve", vscode.focusEditor)
