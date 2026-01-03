@@ -12,6 +12,10 @@ vim.keymap.set("n", "grn", vim.lsp.buf.rename, { desc = "[R]e[n]ame" })
 vim.keymap.set({ "n", "x" }, "gra", vim.lsp.buf.code_action, { desc = "[G]oto Code [A]ction" })
 vim.keymap.set("n", "grD", vim.lsp.buf.declaration, { desc = "[G]oto [D]eclaration" })
 
+local run = require("commands.run")
+vim.keymap.set("n", "<leader>R", run.RunCode, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>T", run.RunGoTest, { noremap = true, silent = true })
+
 local telescope = require("telescope.builtin")
 vim.keymap.set("n", "<leader>sh", telescope.help_tags, { desc = "[S]earch [H]elp" })
 vim.keymap.set("n", "<leader>sk", telescope.keymaps, { desc = "[S]earch [K]eymaps" })
