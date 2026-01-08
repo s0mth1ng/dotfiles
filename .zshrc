@@ -1,83 +1,55 @@
-export ZSH="$HOME/.oh-my-zsh"
+set -o vi
 
-plugins=(git z zsh-syntax-highlighting zsh-autosuggestions)
+export HISTSIZE=1000000000
+export SAVEHIST=$HISTSIZE
+setopt EXTENDED_HISTORY
+setopt share_history
+setopt extended_glob
 
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-source $ZSH/oh-my-zsh.sh
+autoload -U edit-command-line && zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
 
-fzf-git-branch() {
-    git rev-parse HEAD > /dev/null 2>&1 || return
+autoload -U compinit && compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' special-dirs true
+zstyle ':completion:*' list-dirs-first true
 
-    git branch --color=always --all --sort=-committerdate |
-        grep -v HEAD |
-        fzf --height 50% --ansi --no-multi --preview-window right:65% \
-            --preview 'git log -n 50 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed "s/.* //" <<< {})' |
-        sed "s/.* //"
+function co {
+	awk '{printf "%s,", $1}' | sed 's/.$//g'
 }
-
-fzf-git-checkout() {
-    git rev-parse HEAD > /dev/null 2>&1 || return
-
-    local branch
-
-    branch=$(fzf-git-branch)
-    if [[ "$branch" = "" ]]; then
-        echo "No branch selected."
-        return
-    fi
-
-    # If branch name starts with 'remotes/' then it is a remote branch. By
-    # using --track and a remote branch name, it is the same as:
-    # git checkout -b branchName --track origin/branchName
-    if [[ "$branch" = 'remotes/'* ]]; then
-        git checkout --track $branch
-    else
-        git checkout $branch;
-    fi
-}
-
-alias copy='pbcopy'
-alias ls='eza --icons --color auto --git'
-alias lt='eza --icons --color auto --git --tree -L 2'
-alias code='open -b com.microsoft.VSCode "$@"'
-alias ff='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
-alias fb='fzf-git-checkout'
-alias gt='cd ~ && cd $(fd --type directory -E Library | fzf)'
-alias gcom='gco master && ggl'
-alias c='code'
-alias mr='glab mr view -w'
-alias repo='glab repo view -w'
-alias lg='lazygit'
-alias lock='poetry lock --no-update'
-alias locki='poetry lock --no-update && make install-deps'
-alias pu='git push --force-with-lease'
 
 function qou {
-	awk '{printf "\"%s\",", $1}' | sed 's/.$//g'
+	awk '{printf "\"%s\"\n", $1}'
 }
 
-export FZF_DEFAULT_COMMAND='fd --type file'
-export FZF_DEFAULT_OPTS='--no-height --walker-skip .git,.venv,.mypy_cache,.ruff_cache,__pycache__,node_modules'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS="
-	--preview 'bat -n --color=always {}'
-	--bind 'ctrl-/:change-preview-window(down|hidden|)'"
-export FZF_ALT_C_OPTS="
-	--preview 'eza --icons --color auto --git --tree -L 2 {}'"
+alias ls='eza --icons --git'
+alias lt='eza --icons --git --tree -L 2'
+alias l='ls -la'
+alias v='nvim .'
+alias vi='nvim'
+alias gst='git status'
+alias gf='git fetch'
+alias gco='git checkout'
+alias ggl='git pull'
+alias gcl='git clone'
+alias lg='lazygit'
+alias gcom='gco master && ggl'
+alias uuid='python3 -c "import uuid; print(uuid.uuid4())"'
 
-export PATH=$PATH:~/.local/bin
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:~/go/bin
-export GOROOT="/opt/homebrew/opt/go/libexec"
-export BAT_THEME="OneHalfDark"
-export HOMEBREW_NO_AUTO_UPDATE=1
+export EDITOR=nvim
 
+fpath+=("/opt/homebrew/share/zsh/site-functions")
+
+autoload -Uz promptinit
+promptinit
+prompt pure
+zstyle :prompt:pure:git:dirty color red
+zstyle :prompt:pure:git:branch color magenta
+zstyle :prompt:pure:git:branch color magenta
+zstyle :prompt:pure:prompt:success color green
+prompt_newline='%666v'
+PROMPT=" $PROMPT"
+
+# Sources
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-
-. /opt/homebrew/etc/profile.d/z.sh
-
-eval "$(starship init zsh)"
-
-source "$HOME/.rye/env"
-source "$HOME/.cargo/env"
+source <(fzf --zsh)
