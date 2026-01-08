@@ -1,14 +1,12 @@
 # Font
-font-size = 14
-# adjust-cell-height = -2
-font-family = Iosevka Term
+font-size = 13
+adjust-cell-height = 12
+font-family = lilex nerd font
 font-thicken = true
 
 # Colors
-# background = #000000
-# theme = light:Atom One Light,dark:tomorrow
-theme = dark:kanso-ink
-background-opacity = 0.7
+theme = light:kanso-pearl,dark:kanso-zen
+background-opacity = 0.85
 background-blur-radius = 20
 
 # Misc

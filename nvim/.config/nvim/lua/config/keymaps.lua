@@ -19,7 +19,7 @@ vim.keymap.set("n", "<leader>T", run.RunGoTest, { noremap = true, silent = true 
 local telescope = require("telescope.builtin")
 vim.keymap.set("n", "<leader>sh", telescope.help_tags, { desc = "[S]earch [H]elp" })
 vim.keymap.set("n", "<leader>sk", telescope.keymaps, { desc = "[S]earch [K]eymaps" })
-vim.keymap.set("n", "<leader>sf", telescope.find_files, { desc = "[S]earch [F]iles" })
+vim.keymap.set("n", "<leader>\\", telescope.find_files, { desc = "[S]earch [F]iles" })
 vim.keymap.set("n", "<leader>sG", telescope.git_status, { desc = "[S]earch [G]it status" })
 vim.keymap.set("n", "<leader>st", telescope.builtin, { desc = "[S]earch [T]elescope" })
 vim.keymap.set("n", "<leader>ss", telescope.lsp_document_symbols, { desc = "[S]earch [S]ymbols" })

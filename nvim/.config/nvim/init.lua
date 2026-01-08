@@ -2,5 +2,4 @@ require("config.options")
 require("config.lazy")
 require("config.keymaps")
 
--- vim.cmd.colorscheme("tairiki")
 vim.cmd.colorscheme("kanso")
